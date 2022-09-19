@@ -48,28 +48,19 @@ class Signin(PublicApiMixin, APIView):
 
         try:
             data = json.loads(request.body)
-            print(data)
             
             # email 확인
             if not User.objects.filter(email=data['email']).exists():
-                print("here")
-                
                 return JsonResponse ({"MESSAGE":"HTTP_401_UNAUTHORIZED"}, status=status.HTTP_401_UNAUTHORIZED)
 
             user = User.objects.get(email=data["email"])
-            print("user : ", user)
-            print("here1")
 
             # password 확인
             if not bcrypt.checkpw(data["password"].encode("utf-8"), user.password.encode("utf-8")):
                 return JsonResponse({"message": "HTTP_401_UNAUTHORIZED"}, status=status.HTTP_401_UNAUTHORIZED)
 
-            print("here2")
             response = jwt_login(user=user, email=user.email, username=user.username)
-            print("response : ", response)
-
             refresh_token=response['refresh_token']
-            print("refresh_token : ", refresh_token)
             
             return Response({'token': response}, status=status.HTTP_200_OK)
 
@@ -113,7 +104,6 @@ class ImageIdData(ApiAuthMixin, APIView):
         data = {
             "image_id" : image_id_data.image_url_id
         }
-
         return Response({'image_url_id': data}, status=status.HTTP_200_OK)
 
     def post(self, request, id):
@@ -137,7 +127,6 @@ class ImageIdData(ApiAuthMixin, APIView):
 # 분석결과
 class ResultApi(ApiAuthMixin, APIView):
     def post(self, request):
-        # data = json.loads(request.body)
 
         if not request.user.id:
             response = Response({
@@ -145,15 +134,10 @@ class ResultApi(ApiAuthMixin, APIView):
             }, status=status.HTTP_401_UNAUTHORIZED)
             return response
 
-        ran=int(random.randrange(1, 100))
-
-        print("user_id는 : ", request.user.id)
-
-        
         image=Image.objects.create(
             image_url = "https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg",
             user_id = request.user.id,
-            image_url_id = ran,
+            image_url_id = int(random.randrange(1, 100)),
             mock_data = {
                 "crack":{"cverall":0.7,"type1":0.5,"type2":0.5},
                 "color":{"white ":0.7,"red-black":0.5,"black":0.5, "blue":0.7,"green":0.5,"yellow":0.5},
@@ -168,6 +152,5 @@ class ResultApi(ApiAuthMixin, APIView):
                 "pointed":0.5
                 }
         )
-        print("image_id : ", image.id)
         return Response({'image_id': image.id}, status=status.HTTP_201_CREATED)
 
