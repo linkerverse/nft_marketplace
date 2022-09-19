@@ -1,9 +1,9 @@
 LV_MYSQL = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'test', 
+        'NAME': 'db_name', 
         'USER': 'root', 
-        'PASSWORD': '1q2w3e4r!', 
+        'PASSWORD': 'password', 
         'HOST': '127.0.0.1', 
         'PORT': '3306', 
         'OPTIONS': {
