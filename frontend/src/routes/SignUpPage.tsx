@@ -1,5 +1,7 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
+import { API_ENDPOINTS } from "../api/ApiEndpoint";
+import http from "../api/http";
 
 const Wrapper = styled.section`
   display: flex;
@@ -67,16 +69,29 @@ a {
 `;
 
 const SignUpPage: FC = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("비밀번호 확인이 잘못 작성되었습니다.");
+      return;
+    }
+    http
+      .post(API_ENDPOINTS.SIGN_UP, { name, email, password })
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));
 
-    console.log(email, password, confirmPassword);
+    console.log(name, email, password, confirmPassword);
   };
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === "name-input") {
+      setName(e.currentTarget.value);
+    }
+
     if (e.currentTarget.id === "email-input") {
       setEmail(e.currentTarget.value);
     }
@@ -93,8 +108,17 @@ const SignUpPage: FC = () => {
         <BoxHeading>Sign-up</BoxHeading>
         <hr />
         <SignUpForm onSubmit={handleSubmit}>
+          <InputLabel htmlFor="name-input">
+            name
+            <input
+              id="name-input"
+              type="name"
+              onChange={handleInputChange}
+              value={name}
+            ></input>
+          </InputLabel>
           <InputLabel htmlFor="email-input">
-            Email{" "}
+            Email
             <input
               id="email-input"
               type="email"
@@ -103,7 +127,7 @@ const SignUpPage: FC = () => {
             ></input>
           </InputLabel>
           <InputLabel htmlFor="password-input">
-            Password{" "}
+            Password
             <input
               id="password-input"
               type="password"
@@ -112,7 +136,7 @@ const SignUpPage: FC = () => {
             />
           </InputLabel>
           <InputLabel htmlFor="confirm-password-input">
-            Confirm Password{" "}
+            Confirm Password
             <input
               id="confirm-password-input"
               type="password"
