@@ -5,6 +5,7 @@ import MintTokenPage from "./routes/MintTokenPage";
 import MyTokenPage from "./routes/MyTokenPage";
 import SaleTokenPage from "./routes/SaleTokenPage";
 import SignInPage from "./routes/SignInPage";
+import SignUpPage from "./routes/SignUpPage";
 
 const App: FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: FC = () => {
         <Route path="/my-page" element={<MyTokenPage />} />
         <Route path="/sale" element={<SaleTokenPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
     </BrowserRouter>
   );
