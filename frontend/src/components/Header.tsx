@@ -31,6 +31,7 @@ const SiteLogo = styled.h1`
 const Blank = styled.div`
   grid-column: span 1;
 `;
+
 const Nav = styled.nav`
   grid-column: span 5;
   display: flex;
@@ -54,7 +55,7 @@ const Nav = styled.nav`
   }
 `;
 
-const Login = styled.button`
+const HeaderButton = styled.button`
   padding: 10px 20px;
   font-weight: 700;
   border-radius: 10px;
@@ -71,14 +72,33 @@ const Login = styled.button`
     opacity: 0.6;
   }
 
-  a {
+  a,
+  span {
     font-size: 18px;
     text-decoration: none;
     color: #000;
   }
 `;
 
-const Header: FC = () => {
+const Username = styled.span`
+  grid-column: span 1;
+  padding: 10px 20px;
+  strong {
+    font-weight: 700;
+    font-size: 30px;
+  }
+`;
+
+interface IuserData {
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Header: FC<IuserData> = ({ username, setUsername }: IuserData) => {
+  console.log(username);
+  const handleClickLogout = () => {
+    setUsername("");
+  };
   return (
     <Wrapper>
       <SiteLogo>
@@ -90,10 +110,23 @@ const Header: FC = () => {
         <Link to="/my-page">My Page</Link>
         <Link to="/sale">Sale Page</Link>
       </Nav>
-      <Blank />
-      <Login>
-        <Link to="/sign-in">로그인하기</Link>
-      </Login>
+      {username === "" ? (
+        <>
+          <Blank />
+          <HeaderButton>
+            <Link to="/sign-in">로그인하기</Link>
+          </HeaderButton>
+        </>
+      ) : (
+        <>
+          <Username>
+            <strong>{username}</strong>님 환영합니다.
+          </Username>
+          <HeaderButton onClick={handleClickLogout}>
+            <span>로그아웃</span>
+          </HeaderButton>
+        </>
+      )}
     </Wrapper>
   );
 };

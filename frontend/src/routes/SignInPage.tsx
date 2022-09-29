@@ -1,6 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { API_ENDPOINTS } from "../api/ApiEndpoint";
+import http from "../api/http";
 
 const Wrapper = styled.section`
   display: flex;
@@ -84,9 +87,44 @@ const SignUpBox = styled.div`
 
 const SignUpQuestion = styled.p``;
 
-const SignInPage: FC = () => {
+interface ISetUser {
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SignInPage: FC<ISetUser> = ({ setUsername }) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (email === "") {
+      alert("이메일이 입력되지 않았습니다.");
+      return;
+    }
+    if (password === "") {
+      alert("비밀번호가 입력되지 않았습니다.");
+      return;
+    }
+
+    http
+      .post(API_ENDPOINTS.SIGN_IN, { email, password })
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.token.access_token);
+        localStorage.setItem("userId", res.data.token.user_id);
+        localStorage.setItem("username", res.data.token.username);
+        setUsername(res.data.token.username);
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    if (e.currentTarget.id === "email-input") {
+      setEmail(e.currentTarget.value);
+    }
+    if (e.currentTarget.id === "password-input") {
+      setPassword(e.currentTarget.value);
+    }
   };
   return (
     <Wrapper>
@@ -95,10 +133,20 @@ const SignInPage: FC = () => {
         <hr />
         <SignInForm onSubmit={handleSubmit}>
           <InputLabel htmlFor="email-input">
-            Email <input id="email-input" type="email"></input>
+            Email
+            <input
+              id="email-input"
+              type="email"
+              onChange={handleInputChange}
+            ></input>
           </InputLabel>
           <InputLabel htmlFor="password-input">
-            Password <input id="password-input" type="password"></input>
+            Password
+            <input
+              id="password-input"
+              type="password"
+              onChange={handleInputChange}
+            ></input>
           </InputLabel>
           <ButtonContainer>
             <SignInButton type="button">돌아가기</SignInButton>

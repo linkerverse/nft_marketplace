@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { API_ENDPOINTS } from "../api/ApiEndpoint";
 import http from "../api/http";
@@ -69,6 +70,7 @@ a {
 `;
 
 const SignUpPage: FC = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -81,7 +83,10 @@ const SignUpPage: FC = () => {
     }
     http
       .post(API_ENDPOINTS.SIGN_UP, { name, email, password })
-      .then((res) => console.log(res))
+      .then((res) => {
+        alert("회원가입이 완료되었습니다");
+        navigate("/");
+      })
       .catch((error) => console.error(error));
 
     console.log(name, email, password, confirmPassword);
