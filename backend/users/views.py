@@ -89,6 +89,24 @@ class NftData(ApiAuthMixin, APIView):
         return Response({'data': data_mock}, status=status.HTTP_200_OK)
 
 
+class ImageAllIdData(ApiAuthMixin, APIView):
+    def get(self, request):
+        if not request.user.id:
+            response = Response({
+            "message": "HTTP_401_UNAUTHORIZED"
+            }, status=status.HTTP_401_UNAUTHORIZED)
+            return response
+
+
+        all_id=Image.objects.filter(user_id=request.user.id)
+        print("all : ", all_id)
+        
+        return Response({"all_id":[{
+            "id": i.id
+        }
+        for i in all_id]}, status=status.HTTP_200_OK)
+
+
 
 class ImageIdData(ApiAuthMixin, APIView):  
     def get(self, request, id):
