@@ -47,26 +47,21 @@ const ButtonContainer = styled.div`
 `;
 
 const SignUpButton = styled.button`
-padding: 10px 20px;
-font-weight: 700;
-border-radius: 10px;
-cursor: pointer;
-background-color: #fff;
-border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
-&:hover {
-  background-color: #a6c8ff;
-  opacity: 0.8;
-}
+  &:hover {
+    background-color: #a6c8ff;
+    opacity: 0.8;
+  }
 
-&:active {
-  opacity: 0.6;
-}
-
-a {
-  font-size: 18px;
-  text-decoration: none;
-  color: #000;
+  &:active {
+    opacity: 0.6;
+  }
 `;
 
 const SignUpPage: FC = () => {
@@ -77,6 +72,9 @@ const SignUpPage: FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (name === "" || email === "" || password === "") {
+      alert("입력사항을 모두 입력해주세요.");
+    }
     if (password !== confirmPassword) {
       alert("비밀번호 확인이 잘못 작성되었습니다.");
       return;

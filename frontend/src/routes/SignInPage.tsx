@@ -109,7 +109,7 @@ const SignInPage: FC<ISetUser> = ({ setUsername }) => {
     http
       .post(API_ENDPOINTS.SIGN_IN, { email, password })
       .then((res) => {
-        localStorage.setItem("accessToken", res.data.token.access_token);
+        localStorage.setItem("refreshToken", res.data.token.refresh_token);
         localStorage.setItem("userId", res.data.token.user_id);
         localStorage.setItem("username", res.data.token.username);
         setUsername(res.data.token.username);

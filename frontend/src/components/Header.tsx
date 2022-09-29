@@ -55,8 +55,31 @@ const Nav = styled.nav`
   }
 `;
 
-const HeaderButton = styled.button`
+const LoginButton = styled(Link)`
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
   padding: 10px 20px;
+
+  &:hover {
+    background-color: #a6c8ff;
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+`;
+
+const LogoutButton = styled.button`
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
@@ -72,7 +95,6 @@ const HeaderButton = styled.button`
     opacity: 0.6;
   }
 
-  a,
   span {
     font-size: 18px;
     text-decoration: none;
@@ -106,25 +128,23 @@ const Header: FC<IuserData> = ({ username, setUsername }: IuserData) => {
       </SiteLogo>
       <Blank />
       <Nav>
-        <Link to="/">Mint</Link>
+        <Link to="/mint">Mint</Link>
         <Link to="/my-page">My Page</Link>
         <Link to="/sale">Sale Page</Link>
       </Nav>
       {username === "" ? (
         <>
           <Blank />
-          <HeaderButton>
-            <Link to="/sign-in">로그인하기</Link>
-          </HeaderButton>
+          <LoginButton to="/sign-in">로그인하기</LoginButton>
         </>
       ) : (
         <>
           <Username>
             <strong>{username}</strong>님 환영합니다.
           </Username>
-          <HeaderButton onClick={handleClickLogout}>
+          <LogoutButton onClick={handleClickLogout}>
             <span>로그아웃</span>
-          </HeaderButton>
+          </LogoutButton>
         </>
       )}
     </Wrapper>
