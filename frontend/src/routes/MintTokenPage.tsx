@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { API_ENDPOINTS } from "../api/ApiEndpoint";
 import http from "../api/http";
+import Modal from "../components/Modal";
 import NailTokenCard from "../components/NailTokenCard";
 import { mintNailTokenContract } from "../constracts/web3Config";
 
@@ -42,20 +43,6 @@ const ReportCard = styled.label`
   }
 `;
 
-const ReportImg = styled.div<IReportImg>`
-  background-image: ${(props) => `url(${props.imgUrl})`};
-  background-size: cover;
-  background-position: center;
-  width: 100px;
-  height: 100px;
-`;
-
-const ReportData = styled.div`
-  span {
-    margin-right: 5px;
-  }
-`;
-
 const Button = styled.button`
   padding: 10px 20px;
   font-weight: 700;
@@ -74,10 +61,6 @@ const Button = styled.button`
   }
 `;
 
-interface IReportImg {
-  imgUrl: string;
-}
-
 interface IMyReportList {
   image_id: number;
   image_data: any;
@@ -90,7 +73,10 @@ interface MintPageProps {
 
 const MintTokenPage: FC<MintPageProps> = ({ account }) => {
   const [selectedReportId, setSelectedReportId] = useState<string>("");
+  const [selectedReportIndex, setSelectedReportIndex] = useState<number>();
   const [newNailType, setNewNailType] = useState<string>("");
+  const [newNailImg, setNewNailImg] = useState<string>("");
+  const [newNailData, setNewNailData] = useState<any>({});
   const [myReportList, setMyReportList] = useState<IMyReportList[]>([]);
   useEffect(() => {
     http
@@ -103,8 +89,12 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleRadioButton = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleRadioButton = (
+    e: React.FormEvent<HTMLInputElement>,
+    i: number
+  ) => {
     setSelectedReportId(e.currentTarget.id);
+    setSelectedReportIndex(i);
     console.log(e.currentTarget.id);
   };
 
@@ -130,6 +120,10 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
           .call();
 
         setNewNailType(nailType);
+        if (myReportList && selectedReportIndex) {
+          setNewNailImg(myReportList[selectedReportIndex].image_url);
+          setNewNailData(myReportList[selectedReportIndex].image_data);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -146,23 +140,14 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
               <input
                 type="radio"
                 name="report"
-                onChange={handleRadioButton}
+                onChange={(e) => handleRadioButton(e, i)}
                 id={String(p.image_id)}
               />
-              <ReportImg imgUrl={p.image_url} />
-              <ReportData>
-                <h5>color</h5>
-                <span>black:{p?.image_data.color.black}</span>
-                <span>blue:{p?.image_data.color.blue}</span>
-                <span>green:{p?.image_data.color.green}</span>
-                <span>red black:{p?.image_data.color["red-black"]}</span>
-                <span>white:{p?.image_data.color["white "]}</span>
-                <span>yellow:{p?.image_data.color.yellow}</span>
-              </ReportData>
+              <NailTokenCard imgUrl={p.image_url} imgData={p?.image_data} />
             </ReportCard>
           ))}
           {newNailType ? (
-            <>네일토큰</>
+            <Modal imgData={newNailData} imgUrl={newNailImg}></Modal>
           ) : (
             <Button onClick={onClickMint}>NFT 생성</Button>
           )}
