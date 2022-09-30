@@ -10,6 +10,24 @@ import SignUpPage from "./routes/SignUpPage";
 
 const App: FC = () => {
   const [username, setUsername] = useState("");
+  const [account, setAccount] = useState<string>("");
+
+  const getAccount = async () => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        setAccount(accounts[0]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getAccount();
+  }, [account]);
 
   useEffect(() => {
     const loginedUser = localStorage.getItem("username");
@@ -22,7 +40,7 @@ const App: FC = () => {
       <Header username={username} setUsername={setUsername} />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/mint" element={<MintTokenPage />} />
+        <Route path="/mint" element={<MintTokenPage account={account} />} />
         <Route path="/my-page" element={<MyTokenPage />} />
         <Route path="/sale" element={<SaleTokenPage />} />
         <Route

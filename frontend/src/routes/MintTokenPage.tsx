@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { API_ENDPOINTS } from "../api/ApiEndpoint";
 import http from "../api/http";
+import NailTokenCard from "../components/NailTokenCard";
+import { mintNailTokenContract } from "../constracts/web3Config";
 
 const Wrapper = styled.section`
   display: flex;
@@ -29,11 +31,15 @@ const ReportListBox = styled.div`
   gap: 20px;
 `;
 
-const ReportCard = styled.div`
+const ReportCard = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ReportImg = styled.div<IReportImg>`
@@ -78,8 +84,13 @@ interface IMyReportList {
   image_url: string;
 }
 
-const MintTokenPage: FC = () => {
-  const [selectedReportId, setSelectedReportId] = useState<number>(-1);
+interface MintPageProps {
+  account: string;
+}
+
+const MintTokenPage: FC<MintPageProps> = ({ account }) => {
+  const [selectedReportId, setSelectedReportId] = useState<string>("");
+  const [newNailType, setNewNailType] = useState<string>("");
   const [myReportList, setMyReportList] = useState<IMyReportList[]>([]);
   useEffect(() => {
     http
@@ -93,15 +104,45 @@ const MintTokenPage: FC = () => {
   }, []);
 
   const handleRadioButton = (e: React.FormEvent<HTMLInputElement>) => {
+    setSelectedReportId(e.currentTarget.id);
     console.log(e.currentTarget.id);
   };
+
+  const onClickMint = async () => {
+    try {
+      if (!account) return;
+
+      const response = await mintNailTokenContract.methods
+        .mintNailToken(selectedReportId)
+        .send({ from: account });
+
+      if (response.status) {
+        const balanceLength = await mintNailTokenContract.methods
+          .balanceOf(account)
+          .call();
+
+        const nailTokenId = await mintNailTokenContract.methods
+          .tokenOfOwnerByIndex(account, parseInt(balanceLength.length))
+          .call();
+
+        const nailType = await mintNailTokenContract.methods
+          .nailTypes(nailTokenId)
+          .call();
+
+        setNewNailType(nailType);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Wrapper>
       <MintBox>
         <BoxHeading>MintTokenPage</BoxHeading>
         <ReportListBox>
           {myReportList.map((p, i) => (
-            <ReportCard key={i}>
+            <ReportCard key={i} htmlFor={String(p.image_id)}>
               <input
                 type="radio"
                 name="report"
@@ -120,7 +161,11 @@ const MintTokenPage: FC = () => {
               </ReportData>
             </ReportCard>
           ))}
-          <Button>NFT 생성</Button>
+          {newNailType ? (
+            <>네일토큰</>
+          ) : (
+            <Button onClick={onClickMint}>NFT 생성</Button>
+          )}
         </ReportListBox>
       </MintBox>
     </Wrapper>

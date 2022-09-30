@@ -118,8 +118,12 @@ interface IuserData {
 
 const Header: FC<IuserData> = ({ username, setUsername }: IuserData) => {
   console.log(username);
+
   const handleClickLogout = () => {
     setUsername("");
+    localStorage.setItem("refreshToken", "");
+    localStorage.setItem("userId", "");
+    localStorage.setItem("username", "");
   };
   return (
     <Wrapper>
