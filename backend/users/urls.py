@@ -1,5 +1,5 @@
 from django.urls import path
-from users.views import Signin, SignUp, NftData, ImageIdData, ResultApi
+from users.views import Signin, SignUp, NftData, ImageIdData, ResultApi, ImageAllIdData
 
 urlpatterns = [
     path('signup', SignUp.as_view()),
@@ -7,5 +7,6 @@ urlpatterns = [
 
     path('nft/<int:nft_id>', NftData.as_view()),
     path('image/<int:id>', ImageIdData.as_view()),
+    path('image', ImageAllIdData.as_view()),
     path('result', ResultApi.as_view())
 ]
