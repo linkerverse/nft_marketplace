@@ -34,7 +34,6 @@ interface IReportImg {
 }
 
 const NailTokenCard: FC<INailTokenCardProps> = ({ imgUrl, imgData }) => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
   return (
     <Wrapper>
       <ReportImg imgUrl={imgUrl} />
@@ -47,7 +46,6 @@ const NailTokenCard: FC<INailTokenCardProps> = ({ imgUrl, imgData }) => {
         <span>white:{imgData.color["white "]}</span>
         <span>yellow:{imgData.color.yellow}</span>
       </ReportData>
-      <button onClick={() => setIsVisible(false)}>X</button>
     </Wrapper>
   );
 };

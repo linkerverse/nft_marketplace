@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from "../api/ApiEndpoint";
 import http from "../api/http";
 import Modal from "../components/Modal";
 import NailTokenCard from "../components/NailTokenCard";
+import Spinner from "../components/Spinner";
 import { mintNailTokenContract } from "../constracts/web3Config";
 
 const Wrapper = styled.section`
@@ -11,7 +12,6 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
   flex-direction: column;
 `;
 
@@ -78,6 +78,7 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
   const [newNailImg, setNewNailImg] = useState<string>("");
   const [newNailData, setNewNailData] = useState<any>({});
   const [myReportList, setMyReportList] = useState<IMyReportList[]>([]);
+  const [isMinting, setIsMinting] = useState<boolean>(false);
   useEffect(() => {
     http
       .get(API_ENDPOINTS.GET_REPORT, {})
@@ -101,7 +102,7 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
   const onClickMint = async () => {
     try {
       if (!account) return;
-
+      setIsMinting(true);
       const response = await mintNailTokenContract.methods
         .mintNailToken(selectedReportId)
         .send({ from: account });
@@ -125,7 +126,9 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
           setNewNailData(myReportList[selectedReportIndex].image_data);
         }
       }
+      setIsMinting(false);
     } catch (error) {
+      setIsMinting(false);
       console.error(error);
     }
   };
@@ -148,8 +151,11 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
           ))}
           {newNailType ? (
             <Modal imgData={newNailData} imgUrl={newNailImg}></Modal>
+          ) : isMinting ? (
+            <Spinner></Spinner>
           ) : (
-            <Button onClick={onClickMint}>NFT 생성</Button>
+            <Spinner></Spinner>
+            // <Button onClick={onClickMint}>NFT 생성</Button>
           )}
         </ReportListBox>
       </MintBox>

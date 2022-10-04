@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from "../api/ApiEndpoint";
 import http from "../api/http";
 
 const Wrapper = styled.section`
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
