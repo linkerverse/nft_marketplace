@@ -149,7 +149,9 @@ const SignInPage: FC<ISetUser> = ({ setUsername }) => {
             ></input>
           </InputLabel>
           <ButtonContainer>
-            <SignInButton type="button">돌아가기</SignInButton>
+            <SignInButton type="button" onClick={() => navigate(-1)}>
+              돌아가기
+            </SignInButton>
             <SignInButton type="submit">로그인</SignInButton>
           </ButtonContainer>
         </SignInForm>

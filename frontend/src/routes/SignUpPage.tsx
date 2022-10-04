@@ -148,7 +148,9 @@ const SignUpPage: FC = () => {
             />
           </InputLabel>
           <ButtonContainer>
-            <SignUpButton type="button">돌아가기</SignUpButton>
+            <SignUpButton type="button" onClick={() => navigate(-1)}>
+              돌아가기
+            </SignUpButton>
             <SignUpButton type="submit">회원가입</SignUpButton>
           </ButtonContainer>
         </SignUpForm>
