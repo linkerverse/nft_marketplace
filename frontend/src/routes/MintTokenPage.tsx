@@ -154,8 +154,7 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
           ) : isMinting ? (
             <Spinner></Spinner>
           ) : (
-            <Spinner></Spinner>
-            // <Button onClick={onClickMint}>NFT 생성</Button>
+            <Button onClick={onClickMint}>NFT 생성</Button>
           )}
         </ReportListBox>
       </MintBox>
