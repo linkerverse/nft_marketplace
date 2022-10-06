@@ -34,8 +34,8 @@
 - 메타마스크 설치 및 이용 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/%EB%A9%94%ED%83%80%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%9D%B4%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C
 
 ### 파트별 개발자 가이드
-- 프론트엔드
-  (1) Frontend Code 실행 가읻드 : https://github.com/linkerverse/nft_marketplace/wiki/Frontend-Code-%EC%8B%A4%ED%96%89-%EA%B0%80%EC%9D%B4%EB%93%9C
-- 스마트 컨트랙트
-- 백엔드
-  (1) Backend Code 실행방법 : https://github.com/linkerverse/nft_marketplace/wiki/backend-code-%EC%8B%A4%ED%96%89%EB%B0%A9%EB%B2%95
+#### 프론트엔드
+- Frontend Code 실행 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/Frontend-Code-%EC%8B%A4%ED%96%89-%EA%B0%80%EC%9D%B4%EB%93%9C
+#### 스마트 컨트랙트
+#### 백엔드
+- Backend Code 실행방법 : https://github.com/linkerverse/nft_marketplace/wiki/backend-code-%EC%8B%A4%ED%96%89%EB%B0%A9%EB%B2%95
