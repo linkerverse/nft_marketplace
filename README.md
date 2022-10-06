@@ -24,6 +24,13 @@
 <img src="https://img.shields.io/badge/OPEN_ZEPPELIN-4e5ee4?style=for-the-badge&logo=Open-zeppelin&logoColor=white">
 </div>
 
+- Backend
+<div align="left">
+ &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://img.shields.io/badge/PYTHON-3776ab?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/DJANGO-092e20?style=for-the-badge&logo=Django&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479a1?style=for-the-badge&logo=mysql&logoColor=white">
+</div>
+
 
 ## 🏗 Architecture
 ![image](https://user-images.githubusercontent.com/90954655/193984200-f955523d-7bba-4822-b372-179a08041f50.png)
