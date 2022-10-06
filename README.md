@@ -24,6 +24,7 @@
 - Smart Contract
 <div align="left">
  &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://img.shields.io/badge/SOLIDITY-363636?style=for-the-badge&logo=solidity&logoColor=white">
+<img src="https://img.shields.io/badge/OPEN_ZEPPELIN-4e5ee4?style=for-the-badge&logo=Open-zeppelin&logoColor=white">
 </div>
 
 
