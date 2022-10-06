@@ -33,7 +33,7 @@
 
 
 ## 🏗 Architecture
-![image](https://user-images.githubusercontent.com/90954655/193984200-f955523d-7bba-4822-b372-179a08041f50.png)
+![image](https://user-images.githubusercontent.com/90954655/194201273-d6b4e18d-4b49-4aab-b6e6-6b9aa427ee35.png)
 
 ## 🗺 가이드
 ### 페이지 테스트 가이드
