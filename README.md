@@ -3,8 +3,6 @@
 
 ## 📋 Introduce
 서버로부터 손톱 및 손 이미지 데이터를 요청하여 NFT로 만들고, 판매, 구매, 구매한 목록을 조회할 수 있는 마켓플레이스 서비스입니다.
-- 마켓플레이스 이용자 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/NFT-%EB%A7%88%EC%BC%93%ED%94%8C%EB%A0%88%EC%9D%B4%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EA%B0%80%EC%9D%B4%EB%93%9C
-- 메타마스크 설치 및 이용 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/%EB%A9%94%ED%83%80%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%9D%B4%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C
 
 ## ⚙️ Tech Stack
 - Frontend
@@ -27,6 +25,17 @@
 </div>
 
 
-
 ## 🏗 Architecture
 ![image](https://user-images.githubusercontent.com/90954655/193984200-f955523d-7bba-4822-b372-179a08041f50.png)
+
+## 🗺 가이드
+### 페이지 테스트 가이드
+- 마켓플레이스 이용자 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/NFT-%EB%A7%88%EC%BC%93%ED%94%8C%EB%A0%88%EC%9D%B4%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EA%B0%80%EC%9D%B4%EB%93%9C
+- 메타마스크 설치 및 이용 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/%EB%A9%94%ED%83%80%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%9D%B4%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C
+
+### 파트별 개발자 가이드
+- 프론트엔드
+  (1) Frontend Code 실행 가읻드 : https://github.com/linkerverse/nft_marketplace/wiki/Frontend-Code-%EC%8B%A4%ED%96%89-%EA%B0%80%EC%9D%B4%EB%93%9C
+- 스마트 컨트랙트
+- 백엔드
+  (1) Backend Code 실행방법 : https://github.com/linkerverse/nft_marketplace/wiki/backend-code-%EC%8B%A4%ED%96%89%EB%B0%A9%EB%B2%95
