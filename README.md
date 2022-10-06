@@ -9,13 +9,12 @@
 ## ⚙️ Tech Stack
 - Frontend
 <div align="left">
- &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
- <img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+ &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=react&logoColor=white">
  <img src="https://img.shields.io/badge/TYPTSCRIPT-3178c6?style=for-the-badge&logo=Typescript&logoColor=white">
+ <img src="https://img.shields.io/badge/REACT_ROUTER-ca4245?style=for-the-badge&logo=react-router&logoColor=white">
  <img src="https://img.shields.io/badge/Styled_components-db7093?style=for-the-badge&logo=styled-components&logoColor=white">
  <br>
  &nbsp; &nbsp; &nbsp; &nbsp; 
- <img src="https://img.shields.io/badge/REACT_ROUTER-ca4245?style=for-the-badge&logo=react-router&logoColor=white">
  <img src="https://img.shields.io/badge/AXIOS-5a29e4?style=for-the-badge&logo=Axios&logoColor=white">
  <img src="https://img.shields.io/badge/WEB3.js-f16822?style=for-the-badge&logo=Web3.js&logoColor=white">
  <img src="https://img.shields.io/badge/YARN-2C8EBB?style=for-the-badge&logo=YARN&logoColor=white">
