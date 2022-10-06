@@ -50,4 +50,3 @@
 #### 스마트 컨트랙트
 #### 백엔드
 - Backend Code 실행방법 : https://github.com/linkerverse/nft_marketplace/wiki/backend-code-%EC%8B%A4%ED%96%89%EB%B0%A9%EB%B2%95
-- Backend API 명세서 : https://github.com/linkerverse/nft_marketplace/wiki/API-%EB%AA%85%EC%84%B8%EC%84%9C
