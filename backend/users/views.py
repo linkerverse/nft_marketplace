@@ -82,7 +82,7 @@ class NftData(ApiAuthMixin, APIView):
         data_mock = {
             "image" : image_id_data.image_url,
             "data" : image_id_data.mock_data,
-            "image_url_id": image_id_data.image_url_id,
+            # "image_url_id": image_id_data.image_url_id,
             "image_id" : image_id_data.id,
             "nft_id" : image_id_data.nft_id
         }
@@ -102,7 +102,10 @@ class ImageAllIdData(ApiAuthMixin, APIView):
         print("all : ", all_id)
         
         return Response({"all_id":[{
-            "id": i.id
+            "image_id": i.id,
+            # "image_id": i.image_url_id,
+            "image_data": i.mock_data,
+            "image_url":i.image_url
         }
         for i in all_id]}, status=status.HTTP_200_OK)
 
@@ -155,7 +158,7 @@ class ResultApi(ApiAuthMixin, APIView):
         image=Image.objects.create(
             image_url = "https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg",
             user_id = request.user.id,
-            image_url_id = int(random.randrange(1, 100)),
+            # image_url_id = int(random.randrange(1, 100)),
             mock_data = {
                 "crack":{"cverall":0.7,"type1":0.5,"type2":0.5},
                 "color":{"white ":0.7,"red-black":0.5,"black":0.5, "blue":0.7,"green":0.5,"yellow":0.5},
