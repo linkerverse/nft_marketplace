@@ -35,6 +35,10 @@
 ## 🏗 Architecture
 ![image](https://user-images.githubusercontent.com/90954655/194201273-d6b4e18d-4b49-4aab-b6e6-6b9aa427ee35.png)
 
+## 📩 API 명세
+![image](https://user-images.githubusercontent.com/90954655/194212887-f80c741a-15ec-4bdc-a46a-ec7a18b502a0.png)
+
+
 ## 🗺 가이드
 ### 페이지 테스트 가이드
 - 마켓플레이스 이용자 가이드 : https://github.com/linkerverse/nft_marketplace/wiki/NFT-%EB%A7%88%EC%BC%93%ED%94%8C%EB%A0%88%EC%9D%B4%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EA%B0%80%EC%9D%B4%EB%93%9C
@@ -46,4 +50,3 @@
 #### 스마트 컨트랙트
 #### 백엔드
 - Backend Code 실행방법 : https://github.com/linkerverse/nft_marketplace/wiki/backend-code-%EC%8B%A4%ED%96%89%EB%B0%A9%EB%B2%95
-- Backend API 명세서 : https://github.com/linkerverse/nft_marketplace/wiki/API-%EB%AA%85%EC%84%B8%EC%84%9C
