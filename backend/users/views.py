@@ -122,49 +122,15 @@ class ImageIdData(ApiAuthMixin, APIView):
             }, status=status.HTTP_401_UNAUTHORIZED)
             return response
 
-        filtered_data=Image.objects.filter(pk__in=image_id_list)
-        
-        return Response({"filtered_data":[{
+        data_j=[get_object_or_404(Image, pk=i) for i in image_id_list]
+
+        return Response({"filtered_data":[
+            {
             "image_id": i.id,
             "image_data": i.mock_data,
             "image_url":i.image_url
         }
-        for i in filtered_data]}, status=status.HTTP_200_OK)
-
-# class ImageIdData(ApiAuthMixin, APIView):  
-#     def get(self, request, id):
-
-#         if not request.user.id:
-#             response = Response({
-#             "message": "HTTP_401_UNAUTHORIZED"
-#             }, status=status.HTTP_401_UNAUTHORIZED)
-#             return response
-
-#         # image_id_data=get_object_or_404(Image, id=id)
-#         image_id_data=get_object_or_404(Image, id=id)
-
-#         data = {
-#             "image_id" : image_id_data.image_url_id
-#         }
-#         return Response({'image_url_id': data}, status=status.HTTP_200_OK)
-
-    # def post(self, request, id):
-    #     if not request.user.id:
-    #         response = Response({
-    #         "message": "HTTP_401_UNAUTHORIZED"
-    #         }, status=status.HTTP_401_UNAUTHORIZED)
-    #         return response
-
-    #     image_id_data=get_object_or_404(Image, id=id)
-
-    #     data = json.loads(request.body)
-    #     nft_id = data['nft_id']
-
-    #     image_id_data.nft_id = nft_id
-    #     image_id_data.save()
-
-    #     return Response({'nft_id': nft_id}, status=status.HTTP_201_CREATED)
-
+        for i in data_j]}, status=status.HTTP_200_OK)
 
 # 분석결과
 class ResultApi(ApiAuthMixin, APIView):
