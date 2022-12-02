@@ -111,7 +111,7 @@ class ImageAllIdData(ApiAuthMixin, APIView):
 
 
 class ImageIdData(ApiAuthMixin, APIView):  
-    def get(self, request):
+    def post(self, request):
 
         data = json.loads(request.body)
         image_id_list=data.get('image_id_list')
