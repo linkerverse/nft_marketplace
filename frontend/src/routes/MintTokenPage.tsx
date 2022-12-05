@@ -7,6 +7,108 @@ import NailTokenCard from "../components/NailTokenCard";
 import Spinner from "../components/Spinner";
 import { mintNailTokenContract } from "../constracts/web3Config";
 
+interface IMyReportList {
+  image_id: number;
+  image_data: any;
+  image_url: string;
+}
+
+interface MintPageProps {
+  account: string;
+}
+
+const MintTokenPage: FC<MintPageProps> = ({ account }) => {
+  const [selectedReportId, setSelectedReportId] = useState<string>("");
+  const [selectedReportIndex, setSelectedReportIndex] = useState<number>();
+  const [newNailType, setNewNailType] = useState<string>("");
+  const [newNailImg, setNewNailImg] = useState<string>("");
+  const [newNailData, setNewNailData] = useState<any>({});
+  const [myReportList, setMyReportList] = useState<IMyReportList[]>([]);
+  const [isMinting, setIsMinting] = useState<boolean>(false);
+  useEffect(() => {
+    http
+      .get(API_ENDPOINTS.GET_REPORT, {})
+      .then((res) => {
+        setMyReportList(res.data.all_id);
+        console.log(myReportList);
+        console.log(res.data.all_id);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleRadioButton = (
+    e: React.FormEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setSelectedReportId(e.currentTarget.value);
+    setSelectedReportIndex(i);
+    console.log(e.currentTarget.id);
+  };
+
+  const onClickMint = async () => {
+    try {
+      if (!account) return;
+      setIsMinting(true);
+      const response = await mintNailTokenContract.methods
+        .mintNailToken(selectedReportId)
+        .send({ from: account });
+
+      if (response.status) {
+        const balanceLength = await mintNailTokenContract.methods
+          .balanceOf(account)
+          .call();
+
+        const nailTokenId = await mintNailTokenContract.methods
+          .tokenOfOwnerByIndex(account, parseInt(balanceLength.length))
+          .call();
+
+        const nailType = await mintNailTokenContract.methods
+          .nailTypes(nailTokenId)
+          .call();
+
+        setNewNailType(nailType);
+        if (myReportList && selectedReportIndex) {
+          setNewNailImg(myReportList[selectedReportIndex].image_url);
+          setNewNailData(myReportList[selectedReportIndex].image_data);
+        }
+      }
+      setIsMinting(false);
+    } catch (error) {
+      setIsMinting(false);
+      console.error(error);
+    }
+  };
+
+  return (
+    <Wrapper>
+      <MintBox>
+        <BoxHeading>MintTokenPage</BoxHeading>
+        <ReportListBox>
+          {myReportList.map((p, i) => (
+            <ReportCard key={i} htmlFor={String(i)}>
+              <input
+                type="radio"
+                name="report"
+                onChange={(e) => handleRadioButton(e, i)}
+                id={String(i)}
+                value={String(p.image_id)}
+              />
+              <NailTokenCard imgUrl={p.image_url} imgData={p?.image_data} />
+            </ReportCard>
+          ))}
+          {newNailType ? (
+            <Modal imgData={newNailData} imgUrl={newNailImg}></Modal>
+          ) : isMinting ? (
+            <Spinner></Spinner>
+          ) : (
+            <Button onClick={onClickMint}>NFT 생성</Button>
+          )}
+        </ReportListBox>
+      </MintBox>
+    </Wrapper>
+  );
+};
+
 const Wrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -60,106 +162,5 @@ const Button = styled.button`
     opacity: 0.6;
   }
 `;
-
-interface IMyReportList {
-  image_id: number;
-  image_data: any;
-  image_url: string;
-}
-
-interface MintPageProps {
-  account: string;
-}
-
-const MintTokenPage: FC<MintPageProps> = ({ account }) => {
-  const [selectedReportId, setSelectedReportId] = useState<string>("");
-  const [selectedReportIndex, setSelectedReportIndex] = useState<number>();
-  const [newNailType, setNewNailType] = useState<string>("");
-  const [newNailImg, setNewNailImg] = useState<string>("");
-  const [newNailData, setNewNailData] = useState<any>({});
-  const [myReportList, setMyReportList] = useState<IMyReportList[]>([]);
-  const [isMinting, setIsMinting] = useState<boolean>(false);
-  useEffect(() => {
-    http
-      .get(API_ENDPOINTS.GET_REPORT, {})
-      .then((res) => {
-        setMyReportList(res.data.all_id);
-        console.log(myReportList);
-        console.log(res.data.all_id);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-  const handleRadioButton = (
-    e: React.FormEvent<HTMLInputElement>,
-    i: number
-  ) => {
-    setSelectedReportId(e.currentTarget.id);
-    setSelectedReportIndex(i);
-    console.log(e.currentTarget.id);
-  };
-
-  const onClickMint = async () => {
-    try {
-      if (!account) return;
-      setIsMinting(true);
-      const response = await mintNailTokenContract.methods
-        .mintNailToken(selectedReportId)
-        .send({ from: account });
-
-      if (response.status) {
-        const balanceLength = await mintNailTokenContract.methods
-          .balanceOf(account)
-          .call();
-
-        const nailTokenId = await mintNailTokenContract.methods
-          .tokenOfOwnerByIndex(account, parseInt(balanceLength.length))
-          .call();
-
-        const nailType = await mintNailTokenContract.methods
-          .nailTypes(nailTokenId)
-          .call();
-
-        setNewNailType(nailType);
-        if (myReportList && selectedReportIndex) {
-          setNewNailImg(myReportList[selectedReportIndex].image_url);
-          setNewNailData(myReportList[selectedReportIndex].image_data);
-        }
-      }
-      setIsMinting(false);
-    } catch (error) {
-      setIsMinting(false);
-      console.error(error);
-    }
-  };
-
-  return (
-    <Wrapper>
-      <MintBox>
-        <BoxHeading>MintTokenPage</BoxHeading>
-        <ReportListBox>
-          {myReportList.map((p, i) => (
-            <ReportCard key={i} htmlFor={String(p.image_id)}>
-              <input
-                type="radio"
-                name="report"
-                onChange={(e) => handleRadioButton(e, i)}
-                id={String(p.image_id)}
-              />
-              <NailTokenCard imgUrl={p.image_url} imgData={p?.image_data} />
-            </ReportCard>
-          ))}
-          {newNailType ? (
-            <Modal imgData={newNailData} imgUrl={newNailImg}></Modal>
-          ) : isMinting ? (
-            <Spinner></Spinner>
-          ) : (
-            <Button onClick={onClickMint}>NFT 생성</Button>
-          )}
-        </ReportListBox>
-      </MintBox>
-    </Wrapper>
-  );
-};
 
 export default MintTokenPage;

@@ -1,4 +1,4 @@
-// SPDX - License-Identifier: MINT
+// SPDX-License-Identifier: MINT
 
 pragma solidity ^0.8.0;
 
@@ -47,7 +47,7 @@ contract MintNailToken is ERC721Enumerable {
             uint256 nailPrice = saleNailToken.getNailTokenPrice(nailTokenId);
             string memory nailHealthData = nailHealthDatas[nailTokenId];
 
-            nailTokenData[i] = NailTokenData(nailTokenId, nailType, nailPrice,nailHealthData);
+            nailTokenData[i] = NailTokenData(nailTokenId, nailType, nailPrice, nailHealthData);
         }
 
         return nailTokenData;

@@ -641,9 +641,9 @@ const saleNailTokenAbi: AbiItem[] = [
 ];
 
 export const mintNailTokenAddress =
-  "0xE52BD43Bc6C862c92f3d8A892C4a0CB9C10b77bD";
+  "0x22Af346E5f820edAa3e8E9d0Df7610917fc6FBa3";
 export const saleNailTokenAddress =
-  "0xE7B1DE7e2e68eF8642C88454244396F1e29807f1";
+  "0x7FBe6F8681D1accAd676a33691493C3518Df795a";
 
 export const web3 = new Web3(window.ethereum);
 

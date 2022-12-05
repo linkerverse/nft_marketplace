@@ -592,10 +592,11 @@
 	},
 	"sources": {
 		"MintNailToken.sol": {
-			"keccak256": "0x7708a4b45ab06020e33909321925bc812ef35f84904bebf8426929e78cca2c36",
+			"keccak256": "0xddaef94d3767cc2083975a07be2ad70aef95b4b090f8c3fd7da398fede163438",
+			"license": "MINT",
 			"urls": [
-				"bzz-raw://1fa43fa853f404bbd0c16c250cd5bb2dac0a1cc87a29b6564d728fc8a8c0a404",
-				"dweb:/ipfs/QmVEwXQNb9ybynie3ZxKrqRiqMzZV5JFpnFkdggfQ5UhZ9"
+				"bzz-raw://bb98fb854f1ebc02e0d9d2c9f7c9e4310da241e3d85cf653d87f844226244377",
+				"dweb:/ipfs/QmX35eL1psV8EHNQeMepfRTXQztBhuhnhUyzBAdaXeGqzZ"
 			]
 		},
 		"SaleNailToken.sol": {
