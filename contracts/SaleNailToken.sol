@@ -53,7 +53,7 @@ contract SaleNailToken {
         return onSaleNailTokenArray.length;
     }
 
-    function getNailTokenPrice(uint256 _NailTokenId) view public returns(uint256) {
-        return nailTokenPrices[_NailTokenId];
+    function getNailTokenPrice(uint256 _nailTokenId) view public returns(uint256) {
+        return nailTokenPrices[_nailTokenId];
     }
 }
