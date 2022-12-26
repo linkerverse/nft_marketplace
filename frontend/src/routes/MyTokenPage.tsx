@@ -108,7 +108,7 @@ const MyTokenPage: FC<IMyTokenPageProps> = ({ account }) => {
   return (
     <Wrapper>
       <TokenBox>
-        <BoxHeading>MintTokenPage</BoxHeading>
+        <BoxHeading>My TokenPage</BoxHeading>
         <span>
           Sale Status : {saleStatus ? "True" : "False"}
           <button onClick={onClickApproveToggle}>
