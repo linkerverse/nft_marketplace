@@ -35,7 +35,10 @@ const MainPage: FC = () => {
   const createReport = () => {
     http
       .post(API_ENDPOINTS.CREATE_REPORT)
-      .then((res) => alert("검사결과가 생성되었습니다."))
+      .then((res) => {
+        console.log(res);
+        alert("검사결과가 생성되었습니다.");
+      })
       .catch((error) => alert("검사결과 생성에 실패했습니다."));
   };
 

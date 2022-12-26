@@ -592,17 +592,18 @@
 	},
 	"sources": {
 		"MintNailToken.sol": {
-			"keccak256": "0x7708a4b45ab06020e33909321925bc812ef35f84904bebf8426929e78cca2c36",
+			"keccak256": "0xbf8d0be0df40839c807aaac06c111734f0c10b44ff29ac7bcc83ff724bac61e0",
+			"license": "MINT",
 			"urls": [
-				"bzz-raw://1fa43fa853f404bbd0c16c250cd5bb2dac0a1cc87a29b6564d728fc8a8c0a404",
-				"dweb:/ipfs/QmVEwXQNb9ybynie3ZxKrqRiqMzZV5JFpnFkdggfQ5UhZ9"
+				"bzz-raw://f1ed3d4a0f3bbb935aaea5157ded8cb639ba2575db7a4b71e8503b99cedba988",
+				"dweb:/ipfs/QmUw3kRCRvmcAzGkuaPJSW751b65E6t8wzsTve2f78ioM7"
 			]
 		},
 		"SaleNailToken.sol": {
-			"keccak256": "0x311267e84c0d89755c90fb397672ab527b0bfa39f413060507d59b85f35fc0a1",
+			"keccak256": "0x65744518a73b416b0ca65e647a8feac9f1a8c4087cd1fc6ce1fb90502341a21d",
 			"urls": [
-				"bzz-raw://85e013a3cbd326b3ac588ee78a4d6ca79a7aa8bd5c4955c099f2e6afe0c1b2f2",
-				"dweb:/ipfs/QmSHeRfHVxwQHQPhGibxB5CfGVrTHYLdifbmCQCZMG1mNJ"
+				"bzz-raw://db0575f1ee9aeefd3ad6852fa70ff0f47210e34d8fad7661b98f1f964e65c8d5",
+				"dweb:/ipfs/QmPPkJHMBXYsyKXWhhkEmaJvCJdXWv8TREf9BVTwSB6nTw"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {

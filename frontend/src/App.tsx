@@ -41,8 +41,8 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/mint" element={<MintTokenPage account={account} />} />
-        <Route path="/my-page" element={<MyTokenPage />} />
-        <Route path="/sale" element={<SaleTokenPage />} />
+        <Route path="/my-page" element={<MyTokenPage account={account} />} />
+        <Route path="/sale" element={<SaleTokenPage account={account} />} />
         <Route
           path="/sign-in"
           element={<SignInPage setUsername={setUsername} />}
