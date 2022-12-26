@@ -15,6 +15,7 @@ interface IMyNailCard {
   nailTokenId: string;
   nailType: string;
   nailPrice: string;
+  imgData: string;
 }
 
 const SaleTokenPage: FC<SaleNailProps> = ({ account }) => {
@@ -33,18 +34,21 @@ const SaleTokenPage: FC<SaleNailProps> = ({ account }) => {
           .onSaleNailTokenArray(i)
           .call();
 
-        const nailType = await mintNailTokenContract.methods.nailTypes(
-          nailTokenId
-        );
+        const nailType = await mintNailTokenContract.methods
+          .nailTypes(nailTokenId)
+          .call();
 
         const nailPrice = await saleNailTokenContract.methods
           .nailTokenPrices(nailTokenId)
           .call();
 
-        tempOnSailArray.push({ nailTokenId, nailType, nailPrice });
+        const imgData = await mintNailTokenContract.methods
+          .nailHealthDatas(nailTokenId)
+          .call();
+
+        tempOnSailArray.push({ nailTokenId, nailType, nailPrice, imgData });
       }
       setSaleNailCardArray(tempOnSailArray);
-      console.log(tempOnSailArray);
     } catch (error) {
       console.error(error);
     }
@@ -62,8 +66,7 @@ const SaleTokenPage: FC<SaleNailProps> = ({ account }) => {
           {saleNailCardArray &&
             saleNailCardArray.map((p, i) => (
               <SaleNailCard
-                // imgUrl={p.image_url}
-                // imgData={nailCardDatas[i]?.image_data}
+                imgData={p.imgData}
                 imgPrice={p.nailPrice ? p.nailPrice : "NoData"}
                 account={account}
                 nailTokenId={p.nailTokenId}

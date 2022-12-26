@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
+import http from "../api/http";
 import {
   mintNailTokenContract,
   saleNailTokenContract,
   web3,
 } from "../constracts/web3Config";
+import { API_ENDPOINTS } from "../api/ApiEndpoint";
 
 interface SaleNailCardProps {
   nailType?: string;
@@ -24,7 +26,6 @@ const SaleNailCard: FC<SaleNailCardProps> = ({
   nailType,
   nailTokenId,
   imgPrice,
-  imgUrl,
   imgData,
   account,
   getOnSaleNailTokens,
@@ -52,8 +53,6 @@ const SaleNailCard: FC<SaleNailCardProps> = ({
       const response = await saleNailTokenContract.methods
         .purchaseNailToken(nailTokenId)
         .send({ from: account, value: imgPrice });
-      console.log(response);
-      console.log(response.status);
 
       if (response.status) {
         getNailTokenOwner();
@@ -66,21 +65,41 @@ const SaleNailCard: FC<SaleNailCardProps> = ({
   useEffect(() => {
     getNailTokenOwner();
   }, []);
+
+  const [imgUrl, setImgUrl] = useState<string>();
+  const [nailData, setNailData] = useState<any>();
+  useEffect(() => {
+    if (imgData) {
+      http
+        .post(API_ENDPOINTS.GET_NFT_DATA, { image_id_list: [Number(imgData)] })
+        .then((res: any) => {
+          console.log(res);
+          setImgUrl(res.data.filtered_data[0].image_url);
+          setNailData(res.data.filtered_data[0].image_data);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [imgData]);
+  useEffect(() => {
+    console.log(imgUrl);
+  }, [imgUrl]);
   return (
     <Wrapper>
       {imgUrl && <ReportImg imgUrl={imgUrl} />}
       <ReportData>
         <h5>color</h5>
-        <span>black:{imgData?.color?.black}</span>
-        <span>blue:{imgData?.color?.blue}</span>
-        <span>green:{imgData?.color?.green}</span>
-        <span>red black:{imgData?.color?.redblack}</span>
-        <span>white:{imgData?.color?.white}</span>
-        <span>yellow:{imgData?.color?.yellow}</span>
-        {web3.utils.fromWei(imgPrice)} Matic
-        <Button disabled={isBuyable} onClick={onClickBuy}>
-          Buy
-        </Button>
+        <span>black:{nailData?.color?.black}</span>
+        <span>blue:{nailData?.color?.blue}</span>
+        <span>green:{nailData?.color?.green}</span>
+        <span>red black:{nailData?.color?.redblack}</span>
+        <span>white:{nailData?.color?.white}</span>
+        <span>yellow:{nailData?.color?.yellow}</span>
+        <div>
+          {web3.utils.fromWei(imgPrice)} Matic
+          <Button disabled={isBuyable} onClick={onClickBuy}>
+            Buy
+          </Button>
+        </div>
       </ReportData>
     </Wrapper>
   );
