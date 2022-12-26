@@ -143,7 +143,8 @@ class ResultApi(ApiAuthMixin, APIView):
             return response
 
         image=Image.objects.create(
-            image_url = "https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg",
+            # image_url = "https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg",
+            image_url = "https://raw.githubusercontent.com/wlgns410/nft_marketplace/main/backend/images/image.jpeg",
             user_id = request.user.id,
             # image_url_id = int(random.randrange(1, 100)),
             mock_data = {
