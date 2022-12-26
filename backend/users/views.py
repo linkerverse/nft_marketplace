@@ -143,7 +143,7 @@ class ResultApi(ApiAuthMixin, APIView):
             return response
 
         image=Image.objects.create(
-            image_url = "https://raw.githubusercontent.com/wlgns410/nft_marketplace/main/backend/images/image.jpeg",
+            image_url = "https://raw.githubusercontent.com/linkerverse/nft_marketplace/main/backend/images/image.jpeg",
             user_id = request.user.id,
             mock_data = {
                 "crack":{"cverall":0.7,"type1":0.5,"type2":0.5},
