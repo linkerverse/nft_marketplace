@@ -559,7 +559,7 @@ const saleNailTokenAbi: AbiItem[] = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_NailTokenId",
+        name: "_nailTokenId",
         type: "uint256",
       },
     ],
@@ -641,9 +641,9 @@ const saleNailTokenAbi: AbiItem[] = [
 ];
 
 export const mintNailTokenAddress =
-  "0x22Af346E5f820edAa3e8E9d0Df7610917fc6FBa3";
+  "0x9697904F048E0C19C6fB2939eF97CacBcFE466c0";
 export const saleNailTokenAddress =
-  "0x7FBe6F8681D1accAd676a33691493C3518Df795a";
+  "0x5E4408B15A705E4c3d5c62c072D0117f4eB373A4";
 
 export const web3 = new Web3(window.ethereum);
 

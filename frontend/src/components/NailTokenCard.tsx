@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useState } from "react";
 import styled from "styled-components";
 import { saleNailTokenContract, web3 } from "../constracts/web3Config";
 
-interface INailTokenCardProps {
+export interface INailTokenCardProps {
   imgUrl: string;
   imgData: any;
   imgPrice?: any;
@@ -43,6 +43,7 @@ const NailTokenCard: FC<INailTokenCardProps> = ({
       if (response.status) {
         setMyNailPrice(web3.utils.toWei(sellPrice, "ether"));
       }
+      console.log("clear");
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +62,7 @@ const NailTokenCard: FC<INailTokenCardProps> = ({
         <span>yellow:{imgData?.color?.yellow}</span>
         {imgPrice && (
           <div>
-            {imgPrice === "NoData" ? (
+            {imgPrice === "0" ? (
               <SellingBox>
                 <PriceBox>
                   <input

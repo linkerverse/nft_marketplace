@@ -14,7 +14,7 @@ type IMyTokenPageProps = {
 
 type IMyNailCard = {
   nailTokenId: string;
-  nailTokenPrice: string;
+  nailPrice: string;
   nailHealthData: string;
 };
 
@@ -44,7 +44,7 @@ const MyTokenPage: FC<IMyTokenPageProps> = ({ account }) => {
       response.map((v: IMyNailCard) => {
         tempNailCardArray.push({
           nailTokenId: v.nailTokenId,
-          nailTokenPrice: v.nailTokenPrice,
+          nailPrice: v.nailPrice,
           nailHealthData: v.nailHealthData,
         });
         newNailImageIdArray.push(Number(v.nailHealthData));
@@ -120,7 +120,7 @@ const MyTokenPage: FC<IMyTokenPageProps> = ({ account }) => {
             <NailTokenCard
               imgUrl={nailCardDatas[i]?.image_url}
               imgData={nailCardDatas[i]?.image_data}
-              imgPrice={p.nailTokenPrice ? p.nailTokenPrice : "NoData"}
+              imgPrice={p.nailPrice ? p.nailPrice : "NoData"}
               account={account}
               saleStatus={saleStatus}
               nailTokenId={p.nailTokenId}

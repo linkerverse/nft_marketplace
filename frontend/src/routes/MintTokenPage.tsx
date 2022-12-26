@@ -52,6 +52,7 @@ const MintTokenPage: FC<MintPageProps> = ({ account }) => {
       const response = await mintNailTokenContract.methods
         .mintNailToken(selectedReportId)
         .send({ from: account });
+      console.log(response);
 
       if (response.status) {
         const balanceLength = await mintNailTokenContract.methods
